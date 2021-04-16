@@ -44,3 +44,8 @@
 hs_err_pid*
 
 **.idea
+
+drivers
+.settings
+.project
+.classpath
