@@ -8,18 +8,16 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class LoginFeatureTest {
     protected WebDriver driver;
 
     @BeforeMethod
-    public void setup(Method method) {
+    public void setup(Method method)  throws MalformedURLException {
         MutableCapabilities capabilities = new MutableCapabilities();
 
         //sets browser to Firefox
@@ -33,8 +31,8 @@ public class LoginFeatureTest {
 
         //instantiates a remote WebDriver object with your desired capabilities
         try {
-			System.setProperty("webdriver.gecko.driver", "drivers/geckodriver");
-			driver = new FirefoxDriver();
+            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver");
+            driver = new FirefoxDriver();
 		} catch (IllegalStateException e) {
 			System.setProperty("webdriver.gecko.driver", "geckodriver");
 			driver = new FirefoxDriver();
