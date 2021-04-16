@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+import pages.LoginPage;
 
 public class LoginFeatureTest {
     protected WebDriver driver;
@@ -49,7 +50,8 @@ public class LoginFeatureTest {
     public void ShouldBeAbleToLogin() {
 
         //navigate to the url of the Sauce Labs Sample app
-        driver.navigate().to("https://www.saucedemo.com");
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.visit();
 
         // Ignore the following selectors
         String username = "standard_user";
