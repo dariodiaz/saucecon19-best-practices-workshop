@@ -19,12 +19,6 @@ public class FullJourneyTest {
     @Test
     public void fullCustomerJourney(Method method) throws MalformedURLException {
 
-        // String sauceUserName = "dariodad";
-        // String sauceAccessKey = "ed7e91ee-245c-45df-81f3-6dec4203978f";
-        // Input your SauceLabs Credentials
-        // String sauceUsername = System.getenv("SAUCE_USERNAME");
-        // String sauceAccessKey = System.getenv("SAUCE_ACCESS_KEY");
-
         MutableCapabilities capabilities = new MutableCapabilities();
 
         //sets browser to Firefox
