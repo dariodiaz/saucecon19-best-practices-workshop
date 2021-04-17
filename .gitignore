@@ -44,3 +44,7 @@
 hs_err_pid*
 
 **.idea
+.vscode
+.project
+.classpath
+.settings
