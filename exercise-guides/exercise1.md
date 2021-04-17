@@ -102,7 +102,9 @@
     ```
     mvn test -Dtest=LoginFeatureTest
     ```
-8. Use `git stash` or `git commit` to discard or save your changes. Checkout the 2nd branch to proceed to the next exercise
+
+8. Use `git stash` or `git commit` to discard or save your changes. Checkout the next branch to proceed to the next exercise
+>>>>>>> master
     ```
     git checkout 02_create_page_objects
     ```
