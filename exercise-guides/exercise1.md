@@ -61,13 +61,11 @@
     ![Successful Test Build Info](images/ex1-test-build.png)
     > ** Warning:**
     > If you have problems propogating your envirnoment variables into IntelliJ, try refreshing your by running any of the following commands: 
-    >  * `$ source ~/.bashrc`
-    >  * `$ source ~/.bash_profile`
-    >  * `$ source /etc/profile`
+    >  * Navigate to your home directory `$ cd ~/`
+    >  * Open your bash profile and update it `$ open -e .bash_profile`
     
-    > Or append the details to your `.bash_profile` to set them globally
+    > Details to your `.bash_profile` to set them globally
     > ```
-    >    vim ~/.bash_profile
     >    export SAUCE_USERNAME="xxx"
     >    export SAUCE_ACCESS_KEY="XXXXXXX-XXXX-XXXX-XXXXXXXXXXX"
     >    launchctl setenv SAUCE_USERNAME $SAUCE_USERNAME
@@ -104,7 +102,9 @@
     ```
     mvn test -Dtest=LoginFeatureTest
     ```
+
 8. Use `git stash` or `git commit` to discard or save your changes. Checkout the next branch to proceed to the next exercise
+>>>>>>> master
     ```
-    git checkout 02_page_objects
+    git checkout 02_create_page_objects
     ```
