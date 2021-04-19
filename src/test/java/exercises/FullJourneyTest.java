@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.lang.reflect.Method;
@@ -18,17 +19,10 @@ public class FullJourneyTest {
     @Test
     public void fullCustomerJourney(Method method) throws MalformedURLException {
 
-        // Input your SauceLabs Credentials
-        String sauceUsername = System.getenv("SAUCE_USERNAME");
-        String sauceAccessKey = System.getenv("SAUCE_ACCESS_KEY");
-
         MutableCapabilities capabilities = new MutableCapabilities();
 
         //sets browser to Firefox
         capabilities.setCapability("browserName", "firefox");
-
-        //sets operating system to macOS version 10.13
-        capabilities.setCapability("platform", "macOS 10.13");
 
         //sets the browser version to 11.1
         capabilities.setCapability("version", "latest");
@@ -36,13 +30,15 @@ public class FullJourneyTest {
         //sets your test case name so that it shows up in Sauce Labs
         capabilities.setCapability("name", method.getName());
 
-        //sets your Sauce Labs Credentials
-        capabilities.setCapability("username", sauceUsername);
-        capabilities.setCapability("accessKey", sauceAccessKey);
-
         //instantiates a remote WebDriver object with your desired capabilities
-        driver = new RemoteWebDriver(new URL("https://ondemand.saucelabs.com/wd/hub"), capabilities);
-        System.out.println("creating remote WebDriver and setting capabilities");
+        try {
+			System.setProperty("webdriver.gecko.driver", "../drivers/geckodriver");
+			driver = new FirefoxDriver();
+		} catch (IllegalStateException e) {
+			System.setProperty("webdriver.gecko.driver", "../drivers/geckodriver");
+			driver = new FirefoxDriver();
+		}
+        // driver = new RemoteWebDriver(new URL("https://ondemand.saucelabs.com/wd/hub"), capabilities);
 
         //navigate to the url of the Sauce Labs Sample app
         driver.navigate().to("https://www.saucedemo.com");
@@ -58,17 +54,17 @@ public class FullJourneyTest {
         String password = "secret_sauce";
         String userField = "[data-test='username']";
         String passField = "[data-test='password']";
-        String loginBtn = "[value='LOGIN']";
-        String backpack = "#inventory_container > div > div:nth-child(1) > div.pricebar > button";
-        String cart = "#shopping_cart_container > a > svg";
+        String loginBtn = "#login-button";
+        String backpack = "#add-to-cart-sauce-labs-backpack";
+        String cart = ".shopping_cart_link";
         String rmvBtn = "#cart_contents_container > div > div.cart_list > div.cart_item > div.cart_item_label > div.item_pricebar > button";
-        String continueShopping = "div.cart_footer > a.btn_secondary";
-        String checkoutLink = "div.cart_footer > a.btn_action.checkout_button";
+        String continueShopping = "#continue-shopping";
+        String checkoutLink = "#checkout";
         String firstNameField = "[data-test='firstName']";
         String lastNameField = "[data-test='lastName']";
         String postalField= "[data-test='postalCode']";
         String continueLink = "div.checkout_buttons > input";
-        String finished = "div.cart_footer > a.btn_action.cart_button";
+        String finished = "#finish";
         String complete = "https://www.saucedemo.com/checkout-complete.html";
 
         // wait 5 seconds

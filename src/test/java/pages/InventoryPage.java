@@ -15,7 +15,7 @@ public class InventoryPage {
     }
     
     public ShoppingCartPage goToShoppingCart() {
-        String cart = "#shopping_cart_container > a > svg";
+        String cart = ".shopping_cart_link";
         driver.findElement(By.cssSelector(cart)).click();
         return new ShoppingCartPage(driver);
     }
