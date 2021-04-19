@@ -53,20 +53,10 @@ public class LoginFeatureTest {
         // Ignore the following selectors
         String username = "standard_user";
         String password = "secret_sauce";
-        String userField = "[data-test='username']";
-        String passField = "[data-test='password']";
-        String loginBtn = "#login-button";
+        loginPage.login(username, password);
 
         // wait 5 seconds
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        // send username keystrokes
-        driver.findElement(By.cssSelector(userField)).sendKeys(username);
-
-        // send password keystrokes
-        driver.findElement(By.cssSelector(passField)).sendKeys(password);
-
-        // click login button to submit keystrokes
-        driver.findElement(By.cssSelector(loginBtn)).click();
 
         // ignore assertion
         Assert.assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
