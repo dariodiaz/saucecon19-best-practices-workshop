@@ -10,7 +10,7 @@ public class InventoryPage {
     }
 
     public void addBackpackToCart() {
-        String backpack = "div:nth-child(1) > div.pricebar > button";
+        String backpack = "#add-to-cart-sauce-labs-backpack";
         driver.findElement(By.cssSelector(backpack)).click();
     }
     

@@ -55,9 +55,6 @@ public class LoginFeatureTest {
         String password = "secret_sauce";
         loginPage.login(username, password);
 
-        // wait 5 seconds
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
         // ignore assertion
         Assert.assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
     }
