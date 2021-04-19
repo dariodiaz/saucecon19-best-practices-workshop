@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -31,10 +32,10 @@ public class LoginFeatureTest {
         capabilities.setCapability("name", method.getName());
         // instantiates a remote WebDriver object with your desired capabilities
         try {
-            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver");
+            System.setProperty("webdriver.gecko.driver", "../drivers/geckodriver");
             driver = new FirefoxDriver();
         } catch (IllegalStateException e) {
-            System.setProperty("webdriver.gecko.driver", "geckodriver");
+            System.setProperty("webdriver.gecko.driver", "../drivers/geckodriver");
             driver = new FirefoxDriver();
         }
         // driver = new RemoteWebDriver(new
@@ -54,7 +55,7 @@ public class LoginFeatureTest {
         String password = "secret_sauce";
         String userField = "[data-test='username']";
         String passField = "[data-test='password']";
-        String loginBtn = "[value='LOGIN']";
+        String loginBtn = "#login-button";
 
         // wait 5 seconds
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -73,7 +74,7 @@ public class LoginFeatureTest {
 
     @AfterMethod
     public void teardown(ITestResult result) {
-        ((JavascriptExecutor)driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
         driver.quit();
+        System.out.println("Quitting the driver");
     }
 }
