@@ -21,31 +21,27 @@ public class LoginFeatureTest {
     protected WebDriver driver;
 
     @BeforeMethod
-    public void setUp(Method method) throws MalformedURLException
-    {
-        // Input your SauceLabs Credentials
-        String sauceUsername = System.getenv("SAUCE_USERNAME");
-        String sauceAccessKey = System.getenv("SAUCE_ACCESS_KEY");
-
+    public void setup(Method method) throws MalformedURLException {
         MutableCapabilities capabilities = new MutableCapabilities();
-
-        //sets browser to Firefox
+        // sets browser to Firefox
         capabilities.setCapability("browserName", "firefox");
-
-        //sets operating system to macOS version 10.13
-        capabilities.setCapability("platform", "macOS 10.13");
-
-        //sets the browser version to 11.1
-        capabilities.setCapability("version", "58.0");
-
-        //sets your test case name so that it shows up in Sauce Labs
+        // sets the browser version to 11.1
+        capabilities.setCapability("version", "latest");
+        // sets your test case name so that it shows up in Sauce Labs
         capabilities.setCapability("name", method.getName());
-        capabilities.setCapability("username", sauceUsername);
-        capabilities.setCapability("accessKey", sauceAccessKey);
-
-        //instantiates a remote WebDriver object with your desired capabilities
-        driver = new RemoteWebDriver(new URL("https://ondemand.saucelabs.com/wd/hub"), capabilities);
+        // instantiates a remote WebDriver object with your desired capabilities
+        try {
+            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver");
+            driver = new FirefoxDriver();
+        } catch (IllegalStateException e) {
+            System.setProperty("webdriver.gecko.driver", "geckodriver");
+            driver = new FirefoxDriver();
+        }
+        // driver = new RemoteWebDriver(new
+        // URL("https://ondemand.saucelabs.com/wd/hub"), capabilities);
+        System.out.println("creating driver and setting capabilities");
     }
+
     @Test
     public void ShouldBeAbleToLogin() {
 
