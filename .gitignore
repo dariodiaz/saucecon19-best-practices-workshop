@@ -44,16 +44,8 @@
 hs_err_pid*
 
 **.idea
-<<<<<<< HEAD
-.vscode
-.project
-.classpath
-.settings
-=======
-
 drivers
 .settings
 .project
 .classpath
 .vscode
->>>>>>> master
