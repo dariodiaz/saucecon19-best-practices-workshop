@@ -19,7 +19,7 @@ public class LoginPage {
     {
         String userField = "[data-test='username']";
         String passField = "[data-test='password']";
-        String loginBtn = "[value='LOGIN']";
+        String loginBtn = "#login-button";
 
         // send username keystrokes
         driver.findElement(By.cssSelector(userField)).sendKeys(username);

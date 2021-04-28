@@ -45,3 +45,7 @@ hs_err_pid*
 
 **.idea
 /.bash_profile
+.classpath
+.project
+.settings
+src/test/java/drivers

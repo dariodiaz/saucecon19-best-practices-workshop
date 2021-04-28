@@ -9,7 +9,7 @@ public class CheckoutCompletePage {
         this.driver = driver;
     }
 
-    public boolean isLoaded() {
+    public boolean IsLoaded() {
         return driver.getCurrentUrl().contains("https://www.saucedemo.com/checkout-complete.html");
     }
 }

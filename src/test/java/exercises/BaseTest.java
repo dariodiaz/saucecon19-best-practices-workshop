@@ -3,6 +3,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
@@ -14,36 +15,33 @@ import java.lang.reflect.Method;
 
 public class BaseTest {
     protected WebDriver driver;
-
+    
     @BeforeMethod
     public void setup(Method method) throws MalformedURLException {
-        String sauceUsername = System.getenv("SAUCE_USERNAME");
-        String sauceAccessKey = System.getenv("SAUCE_ACCESS_KEY");
-
-        ChromeOptions chromeOpts = new ChromeOptions();
-        chromeOpts.setCapability(CapabilityType.PLATFORM_NAME, "windows 10");
-        chromeOpts.setCapability(CapabilityType.BROWSER_VERSION, "latest");
-
-        MutableCapabilities sauceOpts = new MutableCapabilities();
-        sauceOpts.setCapability("username", sauceUsername);
-        sauceOpts.setCapability("accessKey", sauceAccessKey);
-        sauceOpts.setCapability("name", method.getName());
-        sauceOpts.setCapability("build", "best-practices");
-        sauceOpts.setCapability("tags", "['best-practices', 'best-practices']");
-
         MutableCapabilities capabilities = new MutableCapabilities();
-        capabilities.setCapability(ChromeOptions.CAPABILITY,  chromeOpts);
-        capabilities.setCapability("sauce:options", sauceOpts);
-
-        String sauceUrl = "https://ondemand.saucelabs.com/wd/hub";
-        URL url = new URL(sauceUrl);
-        driver = new RemoteWebDriver(url, capabilities);
+        // sets browser to Firefox
+        capabilities.setCapability("browserName", "firefox");
+        // sets the browser version to 11.1
+        capabilities.setCapability("version", "latest");
+        // sets your test case name so that it shows up in Sauce Labs
+        capabilities.setCapability("name", method.getName());
+        // instantiates a remote WebDriver object with your desired capabilities
+        try {
+            System.setProperty("webdriver.gecko.driver", "../drivers/geckodriver");
+            driver = new FirefoxDriver();
+        } catch (IllegalStateException e) {
+            System.setProperty("webdriver.gecko.driver", "../drivers/geckodriver");
+            driver = new FirefoxDriver();
+        }
+        // driver = new RemoteWebDriver(new
+        // URL("https://ondemand.saucelabs.com/wd/hub"), capabilities);
+        System.out.println("creating driver and setting capabilities");
     }
 
     @AfterMethod
     public void teardown(ITestResult result) {
-        ((JavascriptExecutor)driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
         driver.quit();
+        System.out.println("Quitting the driver");
     }
 }
 
